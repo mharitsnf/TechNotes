@@ -1,4 +1,8 @@
-# Overall Flow
+# Table of Contents
+- [[#GDScript Setup]]
+
+---
+# GDScript Setup
 Godot's compute shader is very C like, where you have to pass in `RID`s if you want to operate on it.
 ## Create / get rendering device
 The rendering device is of type `RenderingDevice`.
@@ -44,7 +48,7 @@ func _init() -> void:
 Can be done by simply writing `pipeline = rd.compute_pipeline_create(shader_rid)`.
 
 ## Create / assign buffers
-Buffers can be of two type (at least what I've used so far): texture and storage buffers. Texture are for, well, textures and storage buffers are for numbers (floats, integers, array of floats or integers, they should all be stored within a `PackedFloat32Array`).
+Buffers can be of two type (at least what I've used so far): texture and storage buffers. Texture are for, well, textures and storage buffers are for numbers (floats, integers, array of floats or integers, they should all be stored within a `PackedFloat32Array`). They can be used for both read and write
 ### Storage buffers
 
 I like making a function for creating the contents of the buffer. For example, in Sabitah, I made a function to get the wave data and transform it into a `PackedFloat32Array`:
@@ -82,3 +86,30 @@ func _process(delta: float) -> void:
 	
 	# ...
 ```
+
+### Texture Buffers
+Additional information needs to be provided for creating texture buffers. On top of setting up the buffer, you need to provide the texture format, including the texture width and height, the data format, and the usage bits. If you want the compute shader to read a texture from an existing file (for example, this is how I read a wave texture in Sabitah), you can set it up this way:
+
+```gdscript
+func _init() -> void:
+	# ...
+
+	var texture_view: RDTextureView = RDTextureView.new()
+	var wave_image: Image = ocean_manager.wave_texture.get_image()
+	wave_image.convert(Image.FORMAT_RGBAF)
+
+	var texture_format: RDTextureFormat = RDTextureFormat.new()
+	texture_format.width = ocean_manager.wave_texture.get_width()
+	texture_format.height = ocean_manager.wave_texture.get_height()
+	texture_format.format = RenderingDevice.DATA_FORMAT_R32G32B32A32_SFLOAT
+	texture_format.usage_bits = (
+		RenderingDevice.TEXTURE_USAGE_STORAGE_BIT + 
+		RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT
+	)
+
+	wave_tex_rid = rd.texture_create(texture_format, texture_view, [wave_image.get_data()])
+	
+	# ...
+```
+
+You can just call this one time during initialization of the buffer.
