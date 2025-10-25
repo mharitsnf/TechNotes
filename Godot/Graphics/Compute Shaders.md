@@ -1,5 +1,6 @@
 # GDScript Setup
 Godot's compute shader is very C like, where you have to pass in `RID`s if you want to operate on it.
+Compute shader in Godot 4 can be used for general calculation purposes as well as for creating compositor effects.
 ## Create / get rendering device
 The rendering device is of type `RenderingDevice`.
 It can be created with `RenderingServer.create_local_rendering_device()` for creating a separate rendering device than the main one, or with `RenderingServer.get_rendering_device()`, which will return the main rendering device of the game / instance.
