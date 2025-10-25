@@ -62,16 +62,22 @@ And then I can call this function during initialization of the buffer:
 var wave_buffer_rid: RID
 
 func _init() -> void:
-	# rest of the code
+	# ...
 	
 	var wave_data: PackedByteArray = _get_wave_data()
 	wave_buffer_rid = rd.storage_buffer_create(wave_data.size(), wave_data)
+	
+	# ...
 ```
 
 Or I can call it during each frame, to update the values inside the buffer:
 
 ```gdscript
 func _process(delta: float) -> void:
+	# ...
+
 	var wave_data: PackedByteArray = _get_wave_data()
 	rd.buffer_update(wave_buffer_rid, 0, wave_data.size(), wave_data)
+	
+	# ...
 ```
