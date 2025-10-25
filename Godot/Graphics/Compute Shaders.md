@@ -45,6 +45,7 @@ Can be done by simply writing `pipeline = rd.compute_pipeline_create(shader_rid)
 
 ## Create / assign buffers
 Buffers can be of two type (at least what I've used so far): texture and storage buffers. Texture are for, well, textures and storage buffers are for numbers (floats, integers, array of floats or integers, they should all be stored within a `PackedFloat32Array`).
+### Storage buffers
 
 I like making a function for creating the contents of the buffer. For example, in Sabitah, I made a function to get the wave data and transform it into a `PackedFloat32Array`:
 
