@@ -1,7 +1,3 @@
-# Table of Contents
-- [[#GDScript Setup]]
-
----
 # GDScript Setup
 Godot's compute shader is very C like, where you have to pass in `RID`s if you want to operate on it.
 ## Create / get rendering device
@@ -48,7 +44,7 @@ func _init() -> void:
 Can be done by simply writing `pipeline = rd.compute_pipeline_create(shader_rid)`.
 
 ## Create / assign buffers
-Buffers can be of two type (at least what I've used so far): texture and storage buffers. Texture are for, well, textures and storage buffers are for numbers (floats, integers, array of floats or integers, they should all be stored within a `PackedFloat32Array`). They can be used for both read and write
+Buffers can be of two type (at least what I've used so far): texture and storage buffers. Texture are for, well, textures and storage buffers are for numbers (floats, integers, array of floats or integers, they should all be stored within a `PackedFloat32Array`). They can be used for both read and write.
 ### Storage buffers
 
 I like making a function for creating the contents of the buffer. For example, in Sabitah, I made a function to get the wave data and transform it into a `PackedFloat32Array`:
