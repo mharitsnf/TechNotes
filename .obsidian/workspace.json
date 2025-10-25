@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Godot/README.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
@@ -169,9 +169,9 @@
       "bases:Create new base": false
     }
   },
-  "active": "78ea8a0fd0e04990",
+  "active": "f62340a86cc142b8",
   "lastOpenFiles": [
-    "Godot/README.md",
+    "README.md",
     "Godot/Graphics/Compute Shaders.md",
     "Godot/Graphics",
     "Godot"
