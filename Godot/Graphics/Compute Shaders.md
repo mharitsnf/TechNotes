@@ -41,6 +41,25 @@ func _init() -> void:
 		shader_rid = rd.shader_create_from_spirv(spirv)
 ```
 
+I am setting the shader string inside another class like this:
+
+```gdscript
+class_name GerstnerCompute extends Node
+
+
+static var use_compute: bool = true
+
+const COMPUTE_CODE: String = """
+#version 450
+
+...
+
+"""
+
+# I can call this function whenever I need to get the shader code. I just need to supply the parameter and the compute shader code will be updated automatically.'
+static func get_compute_code(array_size: int) -> String:
+	return COMPUTE_CODE % [array_size, array_size, array_size, array_size, array_size]
+```
 ## Create Shader Pipeline
 Can be done by simply writing `pipeline = rd.compute_pipeline_create(shader_rid)`.
 
