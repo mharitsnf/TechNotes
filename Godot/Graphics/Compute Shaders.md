@@ -56,7 +56,8 @@ const COMPUTE_CODE: String = """
 
 """
 
-# I can call this function whenever I need to get the shader code. I just need to supply the parameter and the compute shader code will be updated automatically.'
+# I can call this function whenever I need to get the shader code.
+# I just need to supply the parameter and the compute shader code will be updated automatically.
 static func get_compute_code(array_size: int) -> String:
 	return COMPUTE_CODE % [array_size, array_size, array_size, array_size, array_size]
 ```
